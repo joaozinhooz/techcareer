@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sistema_cadastro_empresa/arbitrary_screen.dart';
+import 'package:sistema_cadastro_empresa/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key});
@@ -195,7 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ArbitraryScreen(),
+                            builder: (context) => MenuScreen(),
                           ),
                         );
                       },
