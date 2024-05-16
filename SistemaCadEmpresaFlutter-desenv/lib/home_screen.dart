@@ -9,20 +9,33 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData.light(), // Tema claro padrão
+      darkTheme: ThemeData.dark(), // Tema escuro padrão
       home: MenuScreen(),
     );
   }
 }
 
-class MenuScreen extends StatelessWidget {
+class MenuScreen extends StatefulWidget {
+  @override
+  _MenuScreenState createState() => _MenuScreenState();
+}
+
+class _MenuScreenState extends State<MenuScreen> {
+  int _selectedIndex = 0;
+  bool _isDarkMode = false; // Variável para controlar o modo claro/escuro
+  Color _iconColor = Colors.grey; // Cor do ícone do modo escuro
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: _isDarkMode ? Colors.grey[900] : Colors.white, // Cor de fundo do Scaffold
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: AppBar(
           automaticallyImplyLeading: false,
           titleSpacing: 0,
+          backgroundColor: _isDarkMode ? Colors.grey[900] : Colors.white, // Cor de fundo da barra de navegação
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween, // Alinhar itens à direita
             children: [
@@ -34,23 +47,42 @@ class MenuScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 14.0, right: 8.0, top: 8.0),
                       child: Row(
                         children: [
+                          IconButton(
+                            icon: _isDarkMode
+                                ? Icon(Icons.wb_sunny, color: _iconColor)
+                                : Icon(Icons.nightlight_round, color: _iconColor),
+                            onPressed: () {
+                              setState(() {
+                                _isDarkMode = !_isDarkMode; // Alternar entre claro e escuro
+                                _iconColor = _isDarkMode ? Colors.amber : Colors.black; // Altera a cor do ícone
+                              });
+                            },
+                          ),
                           Text(
                             'Hi, ',
-                            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              color: _isDarkMode ? Colors.white : Colors.black, // Cor do texto
+                            ),
                           ),
                           Text(
                             'Jhon',
-                            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              color: _isDarkMode ? Colors.white : Colors.black, // Cor do texto
+                            ),
                           ),
                         ],
                       ),
                     ),
                     SizedBox(height: 1),
                     Padding(
-                      padding: const EdgeInsets.only(left: 14.0, right: 8.0),
+                      padding: const EdgeInsets.only(left: 14.0, right: 8.0, bottom: 10.0),
                       child: Text(
                         'Encontre seu curso aqui!', // Adicione seu subtítulo aqui
-                        style: TextStyle(fontSize: 14),
+                        style: TextStyle(fontSize: 14, color: _isDarkMode ? Colors.white : Colors.black), // Cor do texto
                       ),
                     ),
                   ],
@@ -64,7 +96,7 @@ class MenuScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: Colors.white,
+                      color: _isDarkMode ? Color.fromARGB(255, 33, 33, 33) : Colors.white,
                       width: 2,
                     ),
                   ),
@@ -95,7 +127,7 @@ class MenuScreen extends StatelessWidget {
                     'Clique aqui para ir a outra tela',
                     style: TextStyle(
                       fontSize: 18,
-                      color: Colors.white, // Cor do texto dentro do card
+                      color: _isDarkMode ? const Color(0xFFFFFFFF) : Colors.white, // Cor do texto dentro do card
                     ),
                   ),
                 ),
@@ -104,6 +136,41 @@ class MenuScreen extends StatelessWidget {
           ),
           // Outros widgets abaixo do card, se houver
         ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'Notifications',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.message),
+            label: 'Messages',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        unselectedItemColor: _isDarkMode ? const Color(0xFFFFFFFF) : Colors.black, // Cor do texto dos ícones não selecionados
+        selectedItemColor: Colors.amber,
+        selectedLabelStyle: TextStyle(color: Colors.amber), // Cor do texto do ícone selecionado
+        unselectedLabelStyle: TextStyle(color: _isDarkMode ? Colors.white : Colors.black), // Cor do texto dos ícones não selecionados
+        onTap: (int index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        backgroundColor: _isDarkMode ? Colors.grey[900] : Colors.white, // Cor de fundo da barra de navegação
       ),
     );
   }
