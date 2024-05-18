@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
+import 'package:sistema_cadastro_empresa/detailspage.dart';
+import 'package:sistema_cadastro_empresa/detailsvideo.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +13,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(), // Tema claro padrão
-      darkTheme: ThemeData.dark(), // Tema escuro padrão
       home: MenuScreen(),
     );
   }
@@ -23,19 +25,35 @@ class MenuScreen extends StatefulWidget {
 
 class _MenuScreenState extends State<MenuScreen> {
   int _selectedIndex = 0;
-  bool _isDarkMode = false; // Variável para controlar o modo claro/escuro
-  Color _iconColor = Colors.grey; // Cor do ícone do modo escuro
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.asset('images/videocc.mp4')
+      ..initialize().then((_) {
+        _controller.setLooping(true); // Repetir o vídeo em loop
+        _controller.play(); // Iniciar a reprodução do vídeo
+        setState(() {}); // Atualizar a interface após a inicialização do vídeo
+      });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose(); // Liberar recursos do controlador de vídeo
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _isDarkMode ? Colors.grey[900] : Colors.white, // Cor de fundo do Scaffold
+      backgroundColor: Colors.white, // Cor de fundo do Scaffold
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: AppBar(
           automaticallyImplyLeading: false,
           titleSpacing: 0,
-          backgroundColor: _isDarkMode ? Colors.grey[900] : Colors.white, // Cor de fundo da barra de navegação
+          backgroundColor: Colors.white, // Cor de fundo da barra de navegação
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween, // Alinhar itens à direita
             children: [
@@ -44,26 +62,15 @@ class _MenuScreenState extends State<MenuScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 14.0, right: 8.0, top: 8.0),
+                      padding: const EdgeInsets.only(left: 14.0, right: 8.0, top: 18.0),
                       child: Row(
                         children: [
-                          IconButton(
-                            icon: _isDarkMode
-                                ? Icon(Icons.wb_sunny, color: _iconColor)
-                                : Icon(Icons.nightlight_round, color: _iconColor),
-                            onPressed: () {
-                              setState(() {
-                                _isDarkMode = !_isDarkMode; // Alternar entre claro e escuro
-                                _iconColor = _isDarkMode ? Colors.amber : Colors.black; // Altera a cor do ícone
-                              });
-                            },
-                          ),
                           Text(
                             'Hi, ',
                             style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
-                              color: _isDarkMode ? Colors.white : Colors.black, // Cor do texto
+                              color: Colors.black, // Cor do texto
                             ),
                           ),
                           Text(
@@ -71,7 +78,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
-                              color: _isDarkMode ? Colors.white : Colors.black, // Cor do texto
+                              color: Colors.black, // Cor do texto
                             ),
                           ),
                         ],
@@ -82,7 +89,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       padding: const EdgeInsets.only(left: 14.0, right: 8.0, bottom: 10.0),
                       child: Text(
                         'Encontre seu curso aqui!', // Adicione seu subtítulo aqui
-                        style: TextStyle(fontSize: 14, color: _isDarkMode ? Colors.white : Colors.black), // Cor do texto
+                        style: TextStyle(fontSize: 14, color: Colors.black), // Cor do texto
                       ),
                     ),
                   ],
@@ -96,12 +103,12 @@ class _MenuScreenState extends State<MenuScreen> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: _isDarkMode ? Color.fromARGB(255, 33, 33, 33) : Colors.white,
+                      color: Colors.white,
                       width: 2,
                     ),
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(11), // Metade da largura do contêiner
+                    borderRadius: BorderRadius.circular(100), // Metade da largura do contêiner
                     child: Image.asset('images/empresario.png'), // Exibe a imagem
                   ),
                 ),
@@ -113,31 +120,101 @@ class _MenuScreenState extends State<MenuScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          GestureDetector(
-            onTap: () {
-              // Navegação para outra tela aqui
-            },
-            child: Card(
-              color: Colors.blue, // Cor do card
-              margin: EdgeInsets.all(10.0), // Margem ao redor do card
-              child: Padding(
-                padding: const EdgeInsets.all(50.0),
-                child: Center(
-                  child: Text(
-                    'Clique aqui para ir a outra tela',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: _isDarkMode ? const Color(0xFFFFFFFF) : Colors.white, // Cor do texto dentro do card
-                    ),
-                  ),
-                ),
+          // Título "Continue Assistindo"
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              'Continue Assistindo',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
             ),
           ),
-          // Outros widgets abaixo do card, se houver
+          Stack(
+  children: [
+    // Vídeo
+    Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0), // Define as bordas arredondadas
+      ),
+      margin: EdgeInsets.all(10.0), // Margem ao redor do card
+      child: AspectRatio(
+        aspectRatio: _controller.value.aspectRatio,
+        child: VideoPlayer(_controller), // Reprodutor de vídeo
+      ),
+    ),
+    // GestureDetector cobrindo o vídeo
+    Positioned.fill(
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailsVideoScreen(),
+            ),
+          );
+        },
+        behavior: HitTestBehavior.translucent, // Permite que o GestureDetector intercepte toques mesmo em áreas transparentes
+      ),
+    ),
+  ],
+),
+
+
+          // Título "Cursos em Destaque"
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              'Cursos em Destaque',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          // Galeria de widgets com fotos
+          Expanded(
+  child: GridView.count(
+    crossAxisCount: 2, // Número de colunas na grade
+    crossAxisSpacing: 10.0, // Espaçamento entre as colunas
+    mainAxisSpacing: 10.0, // Espaçamento entre as linhas
+    padding: EdgeInsets.all(6.0),
+    children: List.generate(4, (index) {
+      return GestureDetector(
+        onTap: () {
+          // Navegar para a tela de detalhes do curso com base no índice
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CourseDetailsPage(courseIndex: index),
+            ),
+          );
+        },
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0), // Define as bordas arredondadas
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15.0), // Arredondamento das bordas
+            child: Image.asset(
+              'images/curso${index + 1}.png', // Caminho para a imagem do curso
+              fit: BoxFit.cover, // Preencher a caixa inteira
+            ),
+          ),
+        ),
+      );
+    }),
+  ),
+),
+
+
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white, // Cor de fundo da barra de navegação
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -149,7 +226,7 @@ class _MenuScreenState extends State<MenuScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
-            label: 'Notifications',
+            label:'Notifications',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.message),
@@ -161,16 +238,15 @@ class _MenuScreenState extends State<MenuScreen> {
           ),
         ],
         currentIndex: _selectedIndex,
-        unselectedItemColor: _isDarkMode ? const Color(0xFFFFFFFF) : Colors.black, // Cor do texto dos ícones não selecionados
+        unselectedItemColor: Colors.black, // Cor do texto dos ícones não selecionados
         selectedItemColor: Colors.amber,
         selectedLabelStyle: TextStyle(color: Colors.amber), // Cor do texto do ícone selecionado
-        unselectedLabelStyle: TextStyle(color: _isDarkMode ? Colors.white : Colors.black), // Cor do texto dos ícones não selecionados
+        unselectedLabelStyle: TextStyle(color: Colors.white), // Cor do texto dos ícones não selecionados
         onTap: (int index) {
           setState(() {
             _selectedIndex = index;
           });
         },
-        backgroundColor: _isDarkMode ? Colors.grey[900] : Colors.white, // Cor de fundo da barra de navegação
       ),
     );
   }
