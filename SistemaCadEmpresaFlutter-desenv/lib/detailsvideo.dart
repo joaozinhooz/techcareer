@@ -1,18 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
-class DetailsVideoScreen extends StatelessWidget {
+class DetailsVideoScreen extends StatefulWidget {
+  @override
+  _DetailsVideoScreenState createState() => _DetailsVideoScreenState();
+}
+
+class _DetailsVideoScreenState extends State<DetailsVideoScreen> {
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    // Inicialize o controlador com o caminho do vídeo local
+    _controller = VideoPlayerController.asset(
+      'images/videoes.mp4', // Substitua pelo nome do seu vídeo
+    )
+      ..initialize().then((_) {
+        setState(() {}); // Atualize o estado para reconstruir o widget e exibir o vídeo
+        _controller.play(); // Reproduza o vídeo automaticamente ao inicializar
+      })
+      ..setLooping(true); // Define o vídeo para repetir automaticamente
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose(); // Liberte o controlador de vídeo quando não for mais necessário
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Engenharia de Software',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Row(
+          children: [
+            Text(
+              'Engenharia de Software',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(width: 8), // Espaço entre o texto e o ícone
+            Icon(
+              Icons.verified,
+              color: Colors.green,
+            ),
+          ],
         ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Vídeo com bordas
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: Colors.grey, width: 2.0),
+              ),
+              child: AspectRatio(
+                aspectRatio: _controller.value.aspectRatio, // Define a proporção do vídeo
+                child: VideoPlayer(_controller),
+              ),
+            ),
+          ),
           // Título
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -24,6 +75,18 @@ class DetailsVideoScreen extends StatelessWidget {
               ),
             ),
           ),
+          // Texto acima da barra de progresso
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'Seu progresso no curso',
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          SizedBox(height: 8),
           // Barra de Progresso
           Container(
             margin: EdgeInsets.symmetric(horizontal: 16.0), // Margem lateral

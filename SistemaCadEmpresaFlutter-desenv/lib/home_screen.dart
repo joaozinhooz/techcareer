@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:sistema_cadastro_empresa/detailspage.dart';
 import 'package:sistema_cadastro_empresa/detailsvideo.dart';
+import 'package:sistema_cadastro_empresa/search_screen.dart';
+import 'package:sistema_cadastro_empresa/notifications_screen.dart'; // Importe a tela de notificações
+import 'package:sistema_cadastro_empresa/messages_screen.dart';
+import 'package:sistema_cadastro_empresa/profile_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -42,6 +46,46 @@ class _MenuScreenState extends State<MenuScreen> {
   void dispose() {
     _controller.dispose(); // Liberar recursos do controlador de vídeo
     super.dispose();
+  }
+
+  void _onItemTapped(int index) {
+    if (index == 1) {
+      // Navegar para a tela de pesquisa
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SearchScreen(),
+        ),
+      );
+    } else if (index == 2) {
+      // Navegar para a tela de notificações
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => NotificationsScreen(),
+        ),
+      );
+      } else if (index == 3) {
+    // Navegar para a tela de mensagens
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MessagesScreen(),
+      ),
+    );
+    } else if (index == 4) {
+  // Navegar para a tela de perfil
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => ProfileScreen(),
+    ),
+  );
+    } else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
 
   @override
@@ -133,36 +177,34 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
           ),
           Stack(
-  children: [
-    // Vídeo
-    Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0), // Define as bordas arredondadas
-      ),
-      margin: EdgeInsets.all(10.0), // Margem ao redor do card
-      child: AspectRatio(
-        aspectRatio: _controller.value.aspectRatio,
-        child: VideoPlayer(_controller), // Reprodutor de vídeo
-      ),
-    ),
-    // GestureDetector cobrindo o vídeo
-    Positioned.fill(
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DetailsVideoScreen(),
-            ),
-          );
-        },
-        behavior: HitTestBehavior.translucent, // Permite que o GestureDetector intercepte toques mesmo em áreas transparentes
-      ),
-    ),
-  ],
-),
-
-
+            children: [
+              // Vídeo
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0), // Define as bordas arredondadas
+                ),
+                margin: EdgeInsets.all(10.0), // Margem ao redor do card
+                child: AspectRatio(
+                  aspectRatio: _controller.value.aspectRatio,
+                  child: VideoPlayer(_controller), // Reprodutor de vídeo
+                ),
+              ),
+              // GestureDetector cobrindo o vídeo
+              Positioned.fill(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailsVideoScreen(),
+                      ),
+                    );
+                  },
+                  behavior: HitTestBehavior.translucent, // Permite que o GestureDetector intercepte toques mesmo em áreas transparentes
+                ),
+              ),
+            ],
+          ),
           // Título "Cursos em Destaque"
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -177,40 +219,38 @@ class _MenuScreenState extends State<MenuScreen> {
           ),
           // Galeria de widgets com fotos
           Expanded(
-  child: GridView.count(
-    crossAxisCount: 2, // Número de colunas na grade
-    crossAxisSpacing: 10.0, // Espaçamento entre as colunas
-    mainAxisSpacing: 10.0, // Espaçamento entre as linhas
-    padding: EdgeInsets.all(6.0),
-    children: List.generate(4, (index) {
-      return GestureDetector(
-        onTap: () {
-          // Navegar para a tela de detalhes do curso com base no índice
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CourseDetailsPage(courseIndex: index),
+            child: GridView.count(
+              crossAxisCount: 2, // Número de colunas na grade
+              crossAxisSpacing: 10.0, // Espaçamento entre as colunas
+              mainAxisSpacing: 10.0, // Espaçamento entre as linhas
+              padding: EdgeInsets.all(6.0),
+              children: List.generate(4, (index) {
+                return GestureDetector(
+                  onTap: () {
+                    // Navegar para a tela de detalhes do curso com base no índice
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CourseDetailsPage(courseIndex: index),
+                      ),
+                    );
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0), // Define as bordas arredondadas
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15.0), // Arredondamento das bordas
+                      child: Image.asset(
+                        'images/curso${index + 1}.png', // Caminho para a imagem do curso
+                        fit: BoxFit.cover, // Preencher a caixa inteira
+                      ),
+                    ),
+                  ),
+                );
+              }),
             ),
-          );
-        },
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0), // Define as bordas arredondadas
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15.0), // Arredondamento das bordas
-            child: Image.asset(
-              'images/curso${index + 1}.png', // Caminho para a imagem do curso
-              fit: BoxFit.cover, // Preencher a caixa inteira
-            ),
-          ),
-        ),
-      );
-    }),
-  ),
-),
-
-
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -242,11 +282,7 @@ class _MenuScreenState extends State<MenuScreen> {
         selectedItemColor: Colors.amber,
         selectedLabelStyle: TextStyle(color: Colors.amber), // Cor do texto do ícone selecionado
         unselectedLabelStyle: TextStyle(color: Colors.white), // Cor do texto dos ícones não selecionados
-        onTap: (int index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
+        onTap: _onItemTapped,
       ),
     );
   }
