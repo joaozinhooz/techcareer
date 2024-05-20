@@ -10,15 +10,16 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   List<CourseWidget> courses = [
-    CourseWidget(name: "Course 1"),
-    CourseWidget(name: "Course 2"),
-    CourseWidget(name: "Course 3"),
-    CourseWidget(name: "Course 4"),
-    CourseWidget(name: "Course 5"),
-    CourseWidget(name: "Course 6"),
-    CourseWidget(name: "Course 7"),
-    CourseWidget(name: "Course 8"),
-  ];
+  CourseWidget(name: "Course 1 (Engenharia)", identifier: "engenharia", image: AssetImage('images/curso1.png')),
+  CourseWidget(name: "Course 2 (Automação)", identifier: "automação", image: AssetImage('images/curso2.png')),
+  CourseWidget(name: "Course 3 (Engenharia)", identifier: "engenharia", image: AssetImage('images/curso3.png')),
+  CourseWidget(name: "Course 4 (Redes)", identifier: "redes", image: AssetImage('images/curso4.png')),
+  CourseWidget(name: "Course 5", identifier: "course5", image: AssetImage('images/course5.png')),
+  CourseWidget(name: "Course 6", identifier: "course6", image: AssetImage('images/course6.png')),
+  CourseWidget(name: "Course 7", identifier: "course7", image: AssetImage('images/course7.png')),
+  CourseWidget(name: "Course 8", identifier: "course8", image: AssetImage('images/course8.png')),
+];
+
 
   List<CourseWidget> filteredCourses = [];
 
@@ -136,22 +137,20 @@ class _SearchScreenState extends State<SearchScreen> {
                 builder: (context) => NotificationsScreen(),
               ),
             );
-            } else if (index == 3) {
-    // Navegar para a tela de mensagens
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => MessagesScreen(),
-      ),
-    );
-    } else if (index == 4) {
-  // Navegar para a tela de perfil
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => ProfileScreen(),
-    ),
-  );
+          } else if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MessagesScreen(),
+              ),
+            );
+          } else if (index == 4) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProfileScreen(),
+              ),
+            );
           }
         },
       ),
@@ -161,8 +160,10 @@ class _SearchScreenState extends State<SearchScreen> {
 
 class CourseWidget extends StatelessWidget {
   final String name;
+  final String identifier; // Adicionando um identificador para cada curso
+  final ImageProvider image;
 
-  const CourseWidget({Key? key, required this.name}) : super(key: key);
+  const CourseWidget({Key? key, required this.name, required this.identifier, required this.image}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -171,9 +172,15 @@ class CourseWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.amber, width: 2),
       ),
-      child: Center(
-        child: Text(name),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Image(
+          image: image,
+          fit: BoxFit.cover, // Ajusta a imagem para preencher todo o espaço disponível
+        ),
       ),
     );
   }
 }
+
+
