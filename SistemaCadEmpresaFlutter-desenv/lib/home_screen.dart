@@ -140,23 +140,34 @@ class _MenuScreenState extends State<MenuScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 5.0, top: 6.0),
-                child: Container(
-                  width: 60, // Ajuste a largura do contêiner conforme necessário
-                  height: 50, // Ajuste a altura do contêiner conforme necessário
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Colors.white,
-                      width: 2,
-                    ),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100), // Metade da largura do contêiner
-                    child: Image.asset('images/empresario.png'), // Exibe a imagem
-                  ),
-                ),
-              ),
+  padding: const EdgeInsets.only(left: 8.0, right: 5.0, top: 6.0),
+  child: GestureDetector(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProfileScreen(),
+        ),
+      );
+    },
+    child: Container(
+      width: 60, // Ajuste a largura do contêiner conforme necessário
+      height: 50, // Ajuste a altura do contêiner conforme necessário
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: Colors.white,
+          width: 2,
+        ),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15), // Metade da largura do contêiner
+        child: Image.asset('images/empresario.png'), // Exibe a imagem
+      ),
+    ),
+  ),
+),
+
             ],
           ),
         ),

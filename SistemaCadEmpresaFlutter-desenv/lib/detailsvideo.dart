@@ -36,7 +36,7 @@ class _DetailsVideoScreenState extends State<DetailsVideoScreen> {
         title: Row(
           children: [
             Text(
-              'Engenharia de Software',
+              'Técnico em Informática',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(width: 8), // Espaço entre o texto e o ícone
@@ -123,19 +123,19 @@ class _DetailsVideoScreenState extends State<DetailsVideoScreen> {
                 // Define a descrição com base no índice
                 switch (index) {
                   case 0:
-                    videoDescription = 'Introdução à Engenharia de Software';
+                    videoDescription = 'Fundamentos de Programação';
                     break;
                   case 1:
-                    videoDescription = 'Desenvolvimento Ágil de Software';
+                    videoDescription = 'Redes de Computadores e Internet';
                     break;
                   case 2:
-                    videoDescription = 'Testes de Software: Conceitos Básicos';
+                    videoDescription = 'Desenvolvimento de Aplicações Web';
                     break;
                   case 3:
-                    videoDescription = 'Arquitetura de Software Moderna';
+                    videoDescription = 'Banco de Dados e SQL';
                     break;
                   case 4:
-                    videoDescription = 'Gerenciamento de Projetos de Software';
+                    videoDescription = 'Manutenção e Suporte de Computadores';
                     break;
                   default:
                     videoDescription = 'Descrição do Vídeo ${index + 1}';

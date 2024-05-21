@@ -10,14 +10,14 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   List<CourseWidget> courses = [
-  CourseWidget(name: "Course 1 (Engenharia)", identifier: "engenharia", image: AssetImage('images/curso1.png')),
-  CourseWidget(name: "Course 2 (Automação)", identifier: "automação", image: AssetImage('images/curso2.png')),
-  CourseWidget(name: "Course 3 (Engenharia)", identifier: "engenharia", image: AssetImage('images/curso3.png')),
-  CourseWidget(name: "Course 4 (Redes)", identifier: "redes", image: AssetImage('images/curso4.png')),
-  CourseWidget(name: "Course 5", identifier: "course5", image: AssetImage('images/course5.png')),
-  CourseWidget(name: "Course 6", identifier: "course6", image: AssetImage('images/course6.png')),
-  CourseWidget(name: "Course 7", identifier: "course7", image: AssetImage('images/course7.png')),
-  CourseWidget(name: "Course 8", identifier: "course8", image: AssetImage('images/course8.png')),
+  CourseWidget(name: "Course 1 (Técnico em Administração) (Tecnico em Administração)", identifier: "Administração", image: AssetImage('images/curso1.png')),
+  CourseWidget(name: "Course 2 (Técnico em Informática) (Tecnico em Informática)", identifier: "Informática", image: AssetImage('images/curso2.png')),
+  CourseWidget(name: "Course 3 (Técnico em Logística) (Tecnico em Logística)", identifier: "Logística", image: AssetImage('images/curso3.png')),
+  CourseWidget(name: "Course 4 (Técnico em Eletrônica) (Tecnico em Eletrônica)", identifier: "Eletrônica", image: AssetImage('images/curso4.png')),
+  CourseWidget(name: "Course 5 (Técnico em Mecânica) (Tecnico em Mecânica)", identifier: "Mecânica", image: AssetImage('images/curso5.png')),
+  CourseWidget(name: "Course 6 (Técnico em Segurança do Trabalho) (Tecnico em Segurança do Trabalho)", identifier: "SegurançadoTrabalho", image: AssetImage('images/curso6.png')),
+  CourseWidget(name: "Course 7 (Técnico em Marketing) (Tecnico em Marketing)", identifier: "Marketing", image: AssetImage('images/curso7.png')),
+  CourseWidget(name: "Course 8 (Técnico em Recursos Humanos) (Tecnico em Recursos Humanos)", identifier: "TécnicoemRecursosHumanos", image: AssetImage('images/curso8.png')),
 ];
 
 
