@@ -71,38 +71,45 @@ class MessagesScreen extends StatelessWidget {
       body: ListView.builder(
         itemCount: messageGroups.length,
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Row(
-              children: [
-                Text(
-                  messageGroups[index].groupName,
-                  style: TextStyle(fontWeight: FontWeight.bold), // Nome do grupo em negrito
-                ),
-                if (messageGroups[index].verified)
-                  Icon(Icons.verified, color: Colors.blue), // Ícone de verificado se o grupo for verificado
-              ],
+          return Container(
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: Colors.black), // Borda preta na parte inferior
+              ),
             ),
-            subtitle: messageGroups[index].messages.isNotEmpty
-                ? Text(messageGroups[index].messages.first.messageText) // Exibição da primeira mensagem do grupo
-                : null,
-            leading: CircleAvatar(
-              backgroundImage: AssetImage(messageGroups[index].groupImage), // Foto do grupo
-            ),
-            onTap: () {
-              // Navega para a tela de chat ao clicar em um grupo de mensagens
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ChatScreen(
-                    groupName: messageGroups[index].groupName,
-                    groupImage: messageGroups[index].groupImage,
-                    messages: messageGroups[index].messages,
-                    verified: messageGroups[index].verified,
-                    isSupport: messageGroups[index].isSupport,
+            child: ListTile(
+              title: Row(
+                children: [
+                  Text(
+                    messageGroups[index].groupName,
+                    style: TextStyle(fontWeight: FontWeight.bold), // Nome do grupo em negrito
                   ),
-                ),
-              );
-            },
+                  if (messageGroups[index].verified)
+                    Icon(Icons.verified, color: Colors.blue), // Ícone de verificado se o grupo for verificado
+                ],
+              ),
+              subtitle: messageGroups[index].messages.isNotEmpty
+                  ? Text(messageGroups[index].messages.first.messageText) // Exibição da primeira mensagem do grupo
+                  : null,
+              leading: CircleAvatar(
+                backgroundImage: AssetImage(messageGroups[index].groupImage), // Foto do grupo
+              ),
+              onTap: () {
+                // Navega para a tela de chat ao clicar em um grupo de mensagens
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ChatScreen(
+                      groupName: messageGroups[index].groupName,
+                      groupImage: messageGroups[index].groupImage,
+                      messages: messageGroups[index].messages,
+                      verified: messageGroups[index].verified,
+                      isSupport: messageGroups[index].isSupport,
+                    ),
+                  ),
+                );
+              },
+            ),
           );
         },
       ),
@@ -149,20 +156,30 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            CircleAvatar(
-              backgroundImage: AssetImage(widget.groupImage), // Foto do grupo na barra de navegação
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: Colors.black), // Borda preta na parte inferior
             ),
-            SizedBox(width: 8), // Espaçamento entre a foto e o texto
-            Text(
-              widget.groupName,
-              style: TextStyle(fontWeight: FontWeight.bold), // Nome do grupo em negrito
+          ),
+          child: AppBar(
+            title: Row(
+              children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage(widget.groupImage), // Foto do grupo na barra de navegação
+                ),
+                SizedBox(width: 8), // Espaçamento entre a foto e o texto
+                Text(
+                  widget.groupName,
+                  style: TextStyle(fontWeight: FontWeight.bold), // Nome do grupo em negrito
+                ),
+                if (widget.verified)
+                  Icon(Icons.verified, color: Colors.blue), // Ícone de verificado se o grupo for verificado
+              ],
             ),
-            if (widget.verified)
-              Icon(Icons.verified, color: Colors.blue), // Ícone de verificado se o grupo for verificado
-          ],
+          ),
         ),
       ),
       body: Column(
@@ -171,12 +188,19 @@ class _ChatScreenState extends State<ChatScreen> {
             child: ListView.builder(
               itemCount: widget.messages.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: AssetImage(widget.messages[index].senderImage),
+                return Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(color: Color.fromARGB(255, 255, 255, 255)), // Borda preta na parte inferior
+                    ),
                   ),
-                  title: Text(widget.messages[index].senderName), // Nome do remetente
-                  subtitle: Text(widget.messages[index].messageText), // Texto da mensagem
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: AssetImage(widget.messages[index].senderImage),
+                    ),
+                    title: Text(widget.messages[index].senderName), // Nome do remetente
+                    subtitle: Text(widget.messages[index].messageText), // Texto da mensagem
+                  ),
                 );
               },
             ),
@@ -185,6 +209,11 @@ class _ChatScreenState extends State<ChatScreen> {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 2.0),
               padding: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(color: Colors.black), // Borda preta na parte superior
+                ),
+              ),
               child: Column(
                 children: [
                   Row(
@@ -193,7 +222,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         child: DropdownButtonFormField<String>(
                           value: selectedOption,
                           items: options.map((String option) {
-                                                      return DropdownMenuItem<String>(
+                            return DropdownMenuItem<String>(
                               value: option,
                               child: Text(option),
                             );
@@ -251,6 +280,11 @@ class _ChatScreenState extends State<ChatScreen> {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 2.0),
               padding: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(color: Colors.black), // Borda preta na parte superior
+                ),
+              ),
               child: Row(
                 children: [
                   Expanded(

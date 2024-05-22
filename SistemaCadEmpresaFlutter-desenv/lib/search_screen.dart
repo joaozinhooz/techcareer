@@ -28,45 +28,52 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   List<Course> courses = [
     Course(
-      name: "Course 1 (Técnico em Administração) (Tecnico em Administração)",
+      name: "Técnico em Administração",
       identifier: "Administração",
       image: AssetImage('images/curso1.png'),
-      description: "gool",
+      description: "Curso voltado para administração de empresas.",
     ),
     Course(
-      name: "Course 2 (Técnico em Informática) (Tecnico em Informática)",
+      name: "Técnico em Informática",
       identifier: "Informática",
       image: AssetImage('images/curso2.png'),
+      description: "Curso voltado para administração de empresas.",
     ),
     Course(
-      name: "Course 3 (Técnico em Logística) (Tecnico em Logística)",
+      name: "Técnico em Logística",
       identifier: "Logística",
       image: AssetImage('images/curso3.png'),
+      description: "Curso voltado para administração de empresas.",
     ),
     Course(
-      name: "Course 4 (Técnico em Eletrônica) (Tecnico em Eletrônica)",
+      name: "Técnico em Eletrônica",
       identifier: "Eletrônica",
       image: AssetImage('images/curso4.png'),
+      description: "Curso voltado para administração de empresas.",
     ),
     Course(
-      name: "Course 5 (Técnico em Mecânica) (Tecnico em Mecânica)",
+      name: "Técnico em Mecânica",
       identifier: "Mecânica",
       image: AssetImage('images/curso5.png'),
+      description: "Curso voltado para administração de empresas.",
     ),
     Course(
-      name: "Course 6 (Técnico em Segurança do Trabalho) (Tecnico em Segurança do Trabalho)",
-      identifier: "SegurançadoTrabalho",
+      name: "Técnico em Segurança do Trabalho",
+      identifier: "Segurança do Trabalho",
       image: AssetImage('images/curso6.png'),
+      description: "Curso voltado para administração de empresas.",
     ),
     Course(
-      name: "Course 7 (Técnico em Marketing) (Tecnico em Marketing)",
+      name: "Técnico em Marketing",
       identifier: "Marketing",
       image: AssetImage('images/curso7.png'),
+      description: "Curso voltado para administração de empresas.",
     ),
     Course(
-      name: "Course 8 (Técnico em Recursos Humanos) (Tecnico em Recursos Humanos)",
-      identifier: "TécnicoemRecursosHumanos",
+      name: "Técnico em Recursos Humanos",
+      identifier: "Recursos Humanos",
       image: AssetImage('images/curso8.png'),
+      description: "Curso voltado para administração de empresas.",
     ),
   ];
 
@@ -128,7 +135,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(color: Colors.yellow),
+                        borderSide: BorderSide(color: const Color.fromARGB(255, 0, 0, 0)),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
@@ -244,7 +251,6 @@ class CourseItem extends StatelessWidget {
   }
 }
 
-
 class Course {
   final String name;
   final String identifier;
@@ -263,7 +269,8 @@ class CourseDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(course.name),
+        backgroundColor: Colors.amber,
+        title: Text("Detalhes do curso"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -271,30 +278,23 @@ class CourseDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Course Details',
+              course.name,
               style: TextStyle(fontSize: 24),
             ),
             SizedBox(height: 20),
             Text(
-              'Name: ${course.name}',
+              course.identifier,
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 10),
             Text(
-              'Identifier: ${course.identifier}',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Description: ${course.description}',
+              course.description,
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 20),
-            // Adicione mais informações conforme necessário
           ],
         ),
       ),
     );
   }
 }
-
