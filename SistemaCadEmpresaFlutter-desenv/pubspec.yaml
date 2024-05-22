@@ -77,7 +77,9 @@ flutter:
     - images/curso6.png
     - images/curso7.png
     - images/curso8.png
-    
+    - images/suporte.png
+    - images/grupo.png
+    - images/user1.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

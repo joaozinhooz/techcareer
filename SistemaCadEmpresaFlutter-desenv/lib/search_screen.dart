@@ -3,25 +3,74 @@ import 'package:sistema_cadastro_empresa/notifications_screen.dart';
 import 'package:sistema_cadastro_empresa/messages_screen.dart';
 import 'package:sistema_cadastro_empresa/profile_screen.dart';
 
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Search Screen',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: SearchScreen(),
+    );
+  }
+}
+
 class SearchScreen extends StatefulWidget {
   @override
   _SearchScreenState createState() => _SearchScreenState();
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  List<CourseWidget> courses = [
-  CourseWidget(name: "Course 1 (Técnico em Administração) (Tecnico em Administração)", identifier: "Administração", image: AssetImage('images/curso1.png')),
-  CourseWidget(name: "Course 2 (Técnico em Informática) (Tecnico em Informática)", identifier: "Informática", image: AssetImage('images/curso2.png')),
-  CourseWidget(name: "Course 3 (Técnico em Logística) (Tecnico em Logística)", identifier: "Logística", image: AssetImage('images/curso3.png')),
-  CourseWidget(name: "Course 4 (Técnico em Eletrônica) (Tecnico em Eletrônica)", identifier: "Eletrônica", image: AssetImage('images/curso4.png')),
-  CourseWidget(name: "Course 5 (Técnico em Mecânica) (Tecnico em Mecânica)", identifier: "Mecânica", image: AssetImage('images/curso5.png')),
-  CourseWidget(name: "Course 6 (Técnico em Segurança do Trabalho) (Tecnico em Segurança do Trabalho)", identifier: "SegurançadoTrabalho", image: AssetImage('images/curso6.png')),
-  CourseWidget(name: "Course 7 (Técnico em Marketing) (Tecnico em Marketing)", identifier: "Marketing", image: AssetImage('images/curso7.png')),
-  CourseWidget(name: "Course 8 (Técnico em Recursos Humanos) (Tecnico em Recursos Humanos)", identifier: "TécnicoemRecursosHumanos", image: AssetImage('images/curso8.png')),
-];
+  List<Course> courses = [
+    Course(
+      name: "Course 1 (Técnico em Administração) (Tecnico em Administração)",
+      identifier: "Administração",
+      image: AssetImage('images/curso1.png'),
+      description: "gool",
+    ),
+    Course(
+      name: "Course 2 (Técnico em Informática) (Tecnico em Informática)",
+      identifier: "Informática",
+      image: AssetImage('images/curso2.png'),
+    ),
+    Course(
+      name: "Course 3 (Técnico em Logística) (Tecnico em Logística)",
+      identifier: "Logística",
+      image: AssetImage('images/curso3.png'),
+    ),
+    Course(
+      name: "Course 4 (Técnico em Eletrônica) (Tecnico em Eletrônica)",
+      identifier: "Eletrônica",
+      image: AssetImage('images/curso4.png'),
+    ),
+    Course(
+      name: "Course 5 (Técnico em Mecânica) (Tecnico em Mecânica)",
+      identifier: "Mecânica",
+      image: AssetImage('images/curso5.png'),
+    ),
+    Course(
+      name: "Course 6 (Técnico em Segurança do Trabalho) (Tecnico em Segurança do Trabalho)",
+      identifier: "SegurançadoTrabalho",
+      image: AssetImage('images/curso6.png'),
+    ),
+    Course(
+      name: "Course 7 (Técnico em Marketing) (Tecnico em Marketing)",
+      identifier: "Marketing",
+      image: AssetImage('images/curso7.png'),
+    ),
+    Course(
+      name: "Course 8 (Técnico em Recursos Humanos) (Tecnico em Recursos Humanos)",
+      identifier: "TécnicoemRecursosHumanos",
+      image: AssetImage('images/curso8.png'),
+    ),
+  ];
 
-
-  List<CourseWidget> filteredCourses = [];
+  List<Course> filteredCourses = [];
 
   @override
   void initState() {
@@ -35,6 +84,15 @@ class _SearchScreenState extends State<SearchScreen> {
           .where((course) => course.name.toLowerCase().contains(query.toLowerCase()))
           .toList();
     });
+  }
+
+  void _navigateToCourseDetails(Course course) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CourseDetailsScreen(course: course),
+      ),
+    );
   }
 
   @override
@@ -96,7 +154,12 @@ class _SearchScreenState extends State<SearchScreen> {
         padding: EdgeInsets.all(16.0),
         mainAxisSpacing: 16.0,
         crossAxisSpacing: 16.0,
-        children: filteredCourses,
+        children: filteredCourses.map((course) {
+          return GestureDetector(
+            onTap: () => _navigateToCourseDetails(course),
+            child: CourseItem(course: course),
+          );
+        }).toList(),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
@@ -158,12 +221,10 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 }
 
-class CourseWidget extends StatelessWidget {
-  final String name;
-  final String identifier; // Adicionando um identificador para cada curso
-  final ImageProvider image;
+class CourseItem extends StatelessWidget {
+  final Course course;
 
-  const CourseWidget({Key? key, required this.name, required this.identifier, required this.image}) : super(key: key);
+  const CourseItem({Key? key, required this.course}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -175,12 +236,65 @@ class CourseWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Image(
-          image: image,
-          fit: BoxFit.cover, // Ajusta a imagem para preencher todo o espaço disponível
+          image: course.image,
+          fit: BoxFit.cover,
         ),
       ),
     );
   }
 }
 
+
+class Course {
+  final String name;
+  final String identifier;
+  final ImageProvider image;
+  final String description;
+
+  Course({required this.name, required this.identifier, required this.image, this.description = ""});
+}
+
+class CourseDetailsScreen extends StatelessWidget {
+  final Course course;
+
+  const CourseDetailsScreen({Key? key, required this.course}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(course.name),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Course Details',
+              style: TextStyle(fontSize: 24),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Name: ${course.name}',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Identifier: ${course.identifier}',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Description: ${course.description}',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 20),
+            // Adicione mais informações conforme necessário
+          ],
+        ),
+      ),
+    );
+  }
+}
 

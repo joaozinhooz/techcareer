@@ -110,7 +110,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       child: Row(
                         children: [
                           Text(
-                            'Hi, ',
+                            'Olá, ',
                             style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
@@ -269,11 +269,11 @@ class _MenuScreenState extends State<MenuScreen> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Inicio',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: 'Search',
+            label: 'Pesquisa',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class Message {
   final String senderName; // Nome do remetente da mensagem
   final String messageText; // Texto da mensagem
-  final String senderImage; // URL da foto do perfil do remetente
+  final String senderImage; // Caminho da foto do perfil do remetente
 
   Message({
     required this.senderName,
@@ -16,7 +16,7 @@ class Message {
 // Modelo de dados para representar um grupo de mensagens
 class MessageGroup {
   final String groupName;
-  final String groupImage; // URL da foto do grupo
+  final String groupImage; // Caminho da foto do grupo
   final List<Message> messages;
   final bool verified; // Indica se o grupo é verificado ou não
   final bool isSupport; // Indica se é um grupo de suporte
@@ -34,17 +34,29 @@ class MessagesScreen extends StatelessWidget {
   // Lista de grupos de mensagens
   final List<MessageGroup> messageGroups = [
     MessageGroup(
-      groupName: 'Grupo 1',
-      groupImage: 'https://via.placeholder.com/150', // Adicione a URL da foto do grupo
+      groupName: 'Tech Wave',
+      groupImage: 'images/grupo.png', // Caminho local da foto do grupo
       verified: true, // Grupo verificado
-      messages: [],
+      messages: [
+        Message(
+          senderName: 'Alice',
+          messageText: 'Olá, pessoal!',
+          senderImage: 'images/user1.png', // Caminho local da foto do remetente
+        ),
+      ],
     ),
     MessageGroup(
       groupName: 'Suporte',
-      groupImage: 'https://via.placeholder.com/150', // Adicione a URL da foto do grupo
+      groupImage: 'images/suporte.png', // Caminho local da foto do grupo
       verified: true, // Grupo verificado
       isSupport: true, // Grupo de suporte
-      messages: [],
+      messages: [
+        Message(
+          senderName: 'Suporte',
+          messageText: 'Como podemos ajudar você hoje?',
+          senderImage: 'images/suporte.png', // Caminho local da foto do remetente
+        ),
+      ],
     ),
     // Adicione mais grupos conforme necessário
   ];
@@ -53,7 +65,8 @@ class MessagesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Messages'), // Título da barra de navegação
+        title: Text('Mensagens'), // Título da barra de navegação
+        backgroundColor: Colors.amber, // Define a cor de fundo como amarelo
       ),
       body: ListView.builder(
         itemCount: messageGroups.length,
@@ -73,7 +86,7 @@ class MessagesScreen extends StatelessWidget {
                 ? Text(messageGroups[index].messages.first.messageText) // Exibição da primeira mensagem do grupo
                 : null,
             leading: CircleAvatar(
-              backgroundImage: NetworkImage(messageGroups[index].groupImage), // Foto do grupo
+              backgroundImage: AssetImage(messageGroups[index].groupImage), // Foto do grupo
             ),
             onTap: () {
               // Navega para a tela de chat ao clicar em um grupo de mensagens
@@ -100,7 +113,7 @@ class MessagesScreen extends StatelessWidget {
 // Tela de chat
 class ChatScreen extends StatefulWidget {
   final String groupName; // Nome do grupo
-  final String groupImage; // URL da foto do grupo
+  final String groupImage; // Caminho da foto do grupo
   final List<Message> messages; // Lista de mensagens para o chat
   final bool verified; // Indica se o grupo é verificado ou não
   final bool isSupport; // Indica se é um grupo de suporte
@@ -140,7 +153,7 @@ class _ChatScreenState extends State<ChatScreen> {
         title: Row(
           children: [
             CircleAvatar(
-              backgroundImage: NetworkImage(widget.groupImage), // Foto do grupo na barra de navegação
+              backgroundImage: AssetImage(widget.groupImage), // Foto do grupo na barra de navegação
             ),
             SizedBox(width: 8), // Espaçamento entre a foto e o texto
             Text(
@@ -160,7 +173,7 @@ class _ChatScreenState extends State<ChatScreen> {
               itemBuilder: (context, index) {
                 return ListTile(
                   leading: CircleAvatar(
-                    backgroundImage: NetworkImage(widget.messages[index].senderImage),
+                    backgroundImage: AssetImage(widget.messages[index].senderImage),
                   ),
                   title: Text(widget.messages[index].senderName), // Nome do remetente
                   subtitle: Text(widget.messages[index].messageText), // Texto da mensagem
@@ -180,7 +193,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         child: DropdownButtonFormField<String>(
                           value: selectedOption,
                           items: options.map((String option) {
-                            return DropdownMenuItem<String>(
+                                                      return DropdownMenuItem<String>(
                               value: option,
                               child: Text(option),
                             );
@@ -198,36 +211,38 @@ class _ChatScreenState extends State<ChatScreen> {
                         IconButton(
                           icon: Icon(Icons.send),
                           onPressed: () {
-                            if (selectedOption != null) {
-                              _sendSupportMessage(selectedOption!);
-                              selectedOption = null;
-                            }
+                            _sendSupportMessage(selectedOption!);
+                            _messageController.clear(); // Limpa o campo de texto após enviar a mensagem
                           },
                         ),
                     ],
                   ),
                   if (isOtherSelected)
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: _messageController,
-                            decoration: InputDecoration(
-                              hintText: 'Descreva seu problema...',
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 2.0),
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              controller: _messageController,
+                              decoration: InputDecoration(
+                                hintText: 'Descreva seu problema...',
+                              ),
+                              onSubmitted: (value) {
+                                _sendOtherMessage(value);
+                              },
                             ),
-                            onSubmitted: (value) {
-                              _sendOtherMessage(value);
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.send),
+                            onPressed: () {
+                              _sendOtherMessage(_messageController.text);
+                              _messageController.clear(); // Limpa o campo de texto após enviar a mensagem
                             },
                           ),
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.send),
-                          onPressed: () {
-                            _sendOtherMessage(_messageController.text);
-                            _messageController.clear();
-                          },
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                 ],
               ),
@@ -269,7 +284,7 @@ class _ChatScreenState extends State<ChatScreen> {
       widget.messages.add(Message(
         senderName: 'Eu',
         messageText: text,
-        senderImage: 'https://via.placeholder.com/150',
+        senderImage: 'images/empresario.png', // Caminho local da foto do remetente
       ));
       // Se for um grupo de 'Grupo 1', limpa o campo de texto após enviar a mensagem
       if (!widget.isSupport) {
@@ -283,12 +298,12 @@ class _ChatScreenState extends State<ChatScreen> {
       widget.messages.add(Message(
         senderName: 'Eu',
         messageText: option,
-        senderImage: 'https://via.placeholder.com/150',
+        senderImage: 'images/empresario.png', // Caminho local da foto do remetente
       ));
       widget.messages.add(Message(
         senderName: 'Suporte',
         messageText: supportResponses[option]!,
-        senderImage: 'https://via.placeholder.com/150',
+        senderImage: 'images/suporte.png', // Caminho local da foto do suporte
       ));
     });
   }
@@ -298,12 +313,12 @@ class _ChatScreenState extends State<ChatScreen> {
       widget.messages.add(Message(
         senderName: 'Eu',
         messageText: text,
-        senderImage: 'https://via.placeholder.com/150',
+        senderImage: 'images/empresario.png', // Caminho local da foto do remetente
       ));
       widget.messages.add(Message(
         senderName: 'Suporte',
         messageText: 'Recebemos seu problema e estamos analisando. Em breve retornaremos com uma solução.',
-        senderImage: 'https://via.placeholder.com/150',
+        senderImage: 'images/suporte.png', // Caminho local da foto do suporte
       ));
     });
   }

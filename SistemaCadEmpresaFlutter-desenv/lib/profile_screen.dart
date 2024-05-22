@@ -5,7 +5,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: Text('Perfil'),
         backgroundColor: Colors.amber, // Cor amarela para a barra de navegação
       ),
       body: SingleChildScrollView(
@@ -28,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               SizedBox(height: 8.0),
               Text(
-                'johndoe@example.com', // Email do usuário
+                'jhondoe@gmail.com', // Email do usuário
                 style: TextStyle(
                   fontSize: 16.0,
                   color: Colors.grey,
@@ -39,12 +39,12 @@ class ProfileScreen extends StatelessWidget {
                 color: Colors.teal.shade800, // Cor de fundo do card
                 child: ListTile(
                   leading: Icon(Icons.verified_user, color: Colors.black), // Ícone preto
-                  title: Text('Certification', style: TextStyle(color: Colors.black)), // Texto preto
+                  title: Text('Certificado', style: TextStyle(color: Colors.black)), // Texto preto
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Flutter Developer Certification', // Nome do certificado
+                        'Certificação em Técnico de Informática', // Nome do certificado
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black, // Texto preto
@@ -52,15 +52,15 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 4.0),
                       Text(
-                        'Issued by: Flutter Institute', // Emissor do certificado
+                        'Emitido por: Instituto Tech Career', // Emissor do certificado
                         style: TextStyle(color: Colors.black), // Texto preto
                       ),
                       Text(
-                        'Issued on: January 1, 2024', // Data de emissão do certificado
+                        'Emitido em: 1º de janeiro de 2024', // Data de emissão do certificado
                         style: TextStyle(color: Colors.black), // Texto preto
                       ),
                       Text(
-                        'Expiration: None', // Data de expiração do certificado
+                        'Expiração: Nenhuma', // Data de expiração do certificado
                         style: TextStyle(color: Colors.black), // Texto preto
                       ),
                     ],
@@ -74,17 +74,17 @@ class ProfileScreen extends StatelessWidget {
                 color: Colors.amber, // Cor de fundo do card
                 child: ListTile(
                   leading: Icon(Icons.location_on, color: Colors.black), // Ícone preto
-                  title: Text('Location', style: TextStyle(color: Colors.black)), // Texto preto
-                  subtitle: Text('New York, USA', style: TextStyle(color: Colors.black)), // Localização do usuário
+                  title: Text('Local', style: TextStyle(color: Colors.black)), // Texto preto
+                  subtitle: Text('São Paulo, BR', style: TextStyle(color: Colors.black)), // Localização do usuário
                 ),
               ),
               Card(
                 color: Colors.amber, // Cor de fundo do card
                 child: ListTile(
                   leading: Icon(Icons.info, color: Colors.black), // Ícone preto
-                  title: Text('About', style: TextStyle(color: Colors.black)), // Texto preto
+                  title: Text('Sobre', style: TextStyle(color: Colors.black)), // Texto preto
                   subtitle: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.', // Descrição sobre o usuário
+                    'A Tech Career capacita indivíduos com cursos práticos de tecnologia, promovendo inclusão e preparação para desafios da indústria. Junte-se a nós para impulsionar sua carreira na crescente indústria de tecnologia.', // Descrição sobre o usuário
                     style: TextStyle(color: Colors.black), // Texto preto
                   ),
                 ),
@@ -94,7 +94,7 @@ class ProfileScreen extends StatelessWidget {
                 child: ListTile(
                   leading: Icon(Icons.link, color: Colors.black), // Ícone preto
                   title: Text('Website', style: TextStyle(color: Colors.black)), // Texto preto
-                  subtitle: Text('https://johndoe.com', style: TextStyle(color: Colors.black)), // Website do usuário
+                  subtitle: Text('https://techcareer.com', style: TextStyle(color: Colors.black)), // Website do usuário
                 ),
               ),
             ],
