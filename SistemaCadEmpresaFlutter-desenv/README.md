@@ -1,4 +1,4 @@
-# Sistema para cadastro de empresa
+<!-- # Sistema para cadastro de empresa
 Criação de aplicativo para gerenciamento de empresas
 
 ## Descrição
@@ -58,4 +58,4 @@ Este projeto utiliza o framework Flutter para desenvolvimento do APP multiplataf
 - [x] (Cadastro/Login) Rota de Botão voltar pra tela abritario
 - [ ] Rota do botão cadastro para tela home
 - [ ] Rota do botão entrar acessando a tela home
-
+ -->
