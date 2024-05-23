@@ -1,0 +1,42 @@
+Course(
+      name: "Técnico em Informática",
+      identifier: "Informática",
+      image: AssetImage('images/curso1.png'),
+      description: "O curso de Técnico em Informática é direcionado para aqueles que desejam atuar na área de tecnologia da informação, oferecendo uma formação sólida em programação, desenvolvimento de sistemas, redes de computadores e manutenção de hardware. Os alunos estudam linguagens de programação como Python, Java e C++, além de aprender sobre banco de dados, segurança da informação, sistemas operacionais e gestão de projetos de TI. A formação também inclui práticas laboratoriais e a execução de projetos que simulam situações reais do mercado de trabalho, preparando os alunos para desafios técnicos e tecnológicos.",
+    ),
+    Course(
+      name: "Técnico em Logística",
+      identifier: "Logística",
+      image: AssetImage('images/curso3.png'),
+      description: "O curso de Técnico em Logística capacita o aluno para atuar na gestão eficiente da cadeia de suprimentos, abrangendo desde a aquisição de matérias-primas até a entrega do produto final ao consumidor. O currículo inclui temas como gestão de estoques, transporte e distribuição, logística reversa, planejamento e controle da produção, e tecnologia da informação aplicada à logística. Os alunos aprendem a utilizar ferramentas e técnicas modernas para otimizar processos logísticos, reduzir custos e melhorar o nível de serviço, contribuindo para a competitividade das empresas no mercado global.",
+    ),
+    Course(
+      name: "Técnico em Eletrônica",
+      identifier: "Eletrônica",
+      image: AssetImage('images/curso4.png'),
+      description: "O curso de Técnico em Eletrônica oferece uma formação técnica especializada em circuitos eletrônicos, sistemas digitais, automação industrial e manutenção de equipamentos eletrônicos. Os alunos aprendem sobre eletrônica analógica e digital, microcontroladores, sistemas de comunicação, e técnicas de projeto e desenvolvimento de circuitos eletrônicos. A formação prática é enfatizada através de laboratórios bem equipados, onde os alunos podem aplicar os conhecimentos teóricos na montagem, teste e reparo de dispositivos eletrônicos. O curso prepara profissionais para atuar em diversos setores da indústria, incluindo automotivo, telecomunicações, e tecnologia da informação.",
+    ),
+    Course(
+      name: "Técnico em Mecânica",
+      identifier: "Mecânica",
+      image: AssetImage('images/curso5.png'),
+      description: "O curso de Técnico em Mecânica é voltado para a formação de profissionais capacitados na manutenção e operação de máquinas e equipamentos industriais. O currículo inclui disciplinas de desenho técnico, resistência dos materiais, processos de fabricação, sistemas hidráulicos e pneumáticos, e metrologia. Os alunos também aprendem sobre a análise de falhas, gestão da manutenção, e técnicas de soldagem e usinagem. A formação prática é essencial, com atividades realizadas em oficinas e laboratórios que simulam o ambiente industrial, preparando os alunos para atender às demandas do setor de manufatura e manutenção.",
+    ),
+    Course(
+      name: "Técnico em Segurança do Trabalho",
+      identifier: "Segurança do Trabalho",
+      image: AssetImage('images/curso6.png'),
+      description: "O curso de Técnico em Segurança do Trabalho forma profissionais responsáveis por garantir a saúde e segurança dos trabalhadores no ambiente laboral. O currículo abrange a identificação e avaliação de riscos, legislação e normas regulamentadoras, ergonomia, prevenção e combate a incêndios, e primeiros socorros. Os alunos são treinados para elaborar e implementar programas de prevenção de acidentes e doenças ocupacionais, realizar inspeções e auditorias de segurança, e promover a conscientização e treinamento dos trabalhadores. O objetivo é criar ambientes de trabalho seguros e saudáveis, reduzindo o índice de acidentes e aumentando a produtividade.",
+    ),
+    Course(
+      name: "Técnico em Marketing",
+      identifier: "Marketing",
+      image: AssetImage('images/curso7.png'),
+      description: "O curso de Técnico em Marketing prepara o aluno para atuar no planejamento, execução e controle de ações de marketing, promovendo produtos e serviços de maneira eficaz. O currículo inclui estudos de comportamento do consumidor, pesquisa de mercado, estratégias de comunicação e publicidade, gestão de marcas, e marketing digital. Os alunos aprendem a desenvolver planos de marketing, criar campanhas publicitárias, analisar dados de mercado e utilizar ferramentas digitais para promover e vender produtos. A formação visa capacitar profissionais criativos e estratégicos, prontos para enfrentar os desafios do mercado competitivo e dinâmico.",
+    ),
+    Course(
+      name: "Técnico em Recursos Humanos",
+      identifier: "Recursos Humanos",
+      image: AssetImage('images/curso8.png'),
+      description: "O curso de Técnico em Recursos Humanos forma profissionais capacitados para gerenciar o capital humano das organizações. O currículo aborda temas como recrutamento e seleção, treinamento e desenvolvimento, gestão de desempenho, remuneração e benefícios, e relações trabalhistas. Os alunos aprendem a aplicar técnicas de entrevista, desenvolver programas de treinamento, elaborar políticas de gestão de pessoas, e promover a integração e motivação dos colaboradores. A formação também inclui aspectos legais e éticos da gestão de pessoas, preparando profissionais para contribuir para o desenvolvimento e a retenção de talentos nas empresas.",
+    ),
