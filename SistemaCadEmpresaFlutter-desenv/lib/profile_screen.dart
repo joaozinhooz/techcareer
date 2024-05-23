@@ -56,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
                         style: TextStyle(color: Colors.black), // Texto preto
                       ),
                       Text(
-                        'Emitido em: 1º de janeiro de 2024', // Data de emissão do certificado
+                        'Emitido em: 23º de Maio de 2024', // Data de emissão do certificado
                         style: TextStyle(color: Colors.black), // Texto preto
                       ),
                       Text(

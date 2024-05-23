@@ -31,51 +31,56 @@ class _SearchScreenState extends State<SearchScreen> {
       name: "Técnico em Administração",
       identifier: "Administração",
       image: AssetImage('images/curso1.png'),
-      description: "Curso voltado para administração de empresas.",
+      description: "O curso de Técnico em Administração forma profissionais aptos a executar atividades administrativas em diversas áreas de uma organização. Os estudantes aprendem sobre gestão de pessoas, finanças, marketing, logística, contabilidade e processos organizacionais. A formação inclui tanto aspectos teóricos quanto práticos, preparando os alunos para atuarem em escritórios, empresas, instituições públicas e privadas.",
     ),
     Course(
       name: "Técnico em Informática",
       identifier: "Informática",
-      image: AssetImage('images/curso2.png'),
-      description: "Curso voltado para administração de empresas.",
+      image: AssetImage('images/curso1.png'),
+      description: "O curso de Técnico em Informática capacita profissionais para atuarem com programação, manutenção de computadores, redes de computadores e desenvolvimento de sistemas. Os alunos estudam linguagens de programação, banco de dados, sistemas operacionais e segurança da informação. A formação prática em laboratórios é uma parte essencial do curso, permitindo aos alunos aplicarem os conhecimentos em situações reais.",
     ),
     Course(
       name: "Técnico em Logística",
       identifier: "Logística",
       image: AssetImage('images/curso3.png'),
-      description: "Curso voltado para administração de empresas.",
+      description: "O curso de Técnico em Logística ensina sobre a gestão da cadeia de suprimentos, transporte, armazenamento e distribuição de mercadorias. Os estudantes aprendem a otimizar processos logísticos, melhorar a eficiência do fluxo de materiais e gerenciar estoques. O curso é ideal para quem deseja trabalhar em armazéns, transportadoras, centros de distribuição e empresas de logística.",
     ),
     Course(
       name: "Técnico em Eletrônica",
       identifier: "Eletrônica",
       image: AssetImage('images/curso4.png'),
-      description: "Curso voltado para administração de empresas.",
+      description: "O curso de Técnico em Eletrônica prepara profissionais para a manutenção e desenvolvimento de sistemas eletrônicos. Os alunos estudam eletrônica digital e analógica, circuitos eletrônicos, automação e controle, além de aprenderem sobre a montagem e manutenção de equipamentos eletrônicos. Este curso é indicado para quem deseja trabalhar em indústrias, empresas de manutenção e tecnologia.",
     ),
     Course(
-      name: "Técnico em Mecânica",
-      identifier: "Mecânica",
-      image: AssetImage('images/curso5.png'),
-      description: "Curso voltado para administração de empresas.",
-    ),
-    Course(
-      name: "Técnico em Segurança do Trabalho",
-      identifier: "Segurança do Trabalho",
-      image: AssetImage('images/curso6.png'),
-      description: "Curso voltado para administração de empresas.",
-    ),
-    Course(
-      name: "Técnico em Marketing",
-      identifier: "Marketing",
-      image: AssetImage('images/curso7.png'),
-      description: "Curso voltado para administração de empresas.",
-    ),
-    Course(
-      name: "Técnico em Recursos Humanos",
-      identifier: "Recursos Humanos",
-      image: AssetImage('images/curso8.png'),
-      description: "Curso voltado para administração de empresas.",
-    ),
+  name: "Técnico em Mecânica",
+  identifier: "Mecânica",
+  image: AssetImage('images/curso5.png'),
+  description: "O curso de Técnico em Mecânica oferece uma formação especializada em manutenção e operação de máquinas industriais. Os alunos aprendem sobre desenho técnico, processos de fabricação, incluindo usinagem e soldagem, e gestão da manutenção. Além disso, são abordados temas como resistência dos materiais, sistemas hidráulicos e pneumáticos, e análise de falhas. Através de aulas teóricas e práticas em laboratórios equipados, os alunos desenvolvem habilidades essenciais para atuar no setor industrial.",
+),
+
+Course(
+  name: "Técnico em Segurança do Trabalho",
+  identifier: "Segurança do Trabalho",
+  image: AssetImage('images/curso6.png'),
+  description: "O curso de Técnico em Segurança do Trabalho capacita profissionais para garantir a saúde e segurança dos trabalhadores em diversos ambientes laborais. Os alunos recebem formação em identificação de riscos ocupacionais, medidas de prevenção de acidentes e doenças do trabalho, e legislação trabalhista relacionada à segurança e saúde ocupacional. Além disso, são treinados em técnicas de primeiros socorros, combate a incêndios, e elaboração de programas de prevenção.",
+),
+
+Course(
+  name: "Técnico em Marketing",
+  identifier: "Marketing",
+  image: AssetImage('images/curso7.png'),
+  description: "O curso de Técnico em Marketing proporciona uma formação abrangente para aqueles que desejam atuar no dinâmico campo do marketing. Os alunos estudam os fundamentos do marketing, incluindo pesquisa de mercado, comportamento do consumidor, estratégias de comunicação e branding. Além disso, são introduzidos a conceitos de marketing digital, como mídias sociais, SEO e marketing de conteúdo. Através de estudos de caso e projetos práticos, os alunos desenvolvem habilidades para planejar, executar e avaliar campanhas de marketing eficazes.",
+),
+
+Course(
+  name: "Técnico em Recursos Humanos",
+  identifier: "Recursos Humanos",
+  image: AssetImage('images/curso8.png'),
+  description: "O curso de Técnico em Recursos Humanos prepara profissionais para atuarem na gestão do capital humano das organizações. Os alunos recebem formação em recrutamento e seleção, treinamento e desenvolvimento, gestão de desempenho, remuneração e benefícios, e relações trabalhistas. Além disso, são abordados temas como legislação trabalhista, ética profissional e diversidade no ambiente de trabalho. Com uma combinação de teoria e prática, o curso capacita os alunos a aplicarem técnicas e ferramentas de gestão de pessoas de forma eficaz.",
+),
+
   ];
+
 
   List<Course> filteredCourses = [];
 

@@ -5,7 +5,6 @@ class CourseDetailsPage extends StatelessWidget {
 
   CourseDetailsPage({required this.courseIndex});
 
-  // Lista de dados com informações de cada curso
   final List<Map<String, String>> coursesData = [
     {
       'title': 'Técnico em Administração',
@@ -31,7 +30,6 @@ class CourseDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Obter os detalhes do curso com base no índice
     String courseTitle = coursesData[courseIndex]['title']!;
     String courseDescription = coursesData[courseIndex]['description']!;
     String courseDetails = coursesData[courseIndex]['details']!;
@@ -39,6 +37,7 @@ class CourseDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Detalhes do Curso'),
+        backgroundColor: Colors.amber, // Definindo a cor de fundo para amarelo
       ),
       body: Column(
         children: [
@@ -124,6 +123,6 @@ class CourseDetailsPage extends StatelessWidget {
 
 void main() {
   runApp(MaterialApp(
-    home: CourseDetailsPage(courseIndex: 0), // Exemplo com o primeiro curso
+    home: CourseDetailsPage(courseIndex: 0),
   ));
 }

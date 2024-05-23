@@ -167,13 +167,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         _login();
 
                         // Verifica se o login foi bem-sucedido
-                        if (_usernameController.text == 'joao' &&
+                        if (_usernameController.text == 'adm' &&
                             _passwordController.text == '123') {
                           // Se o login for bem-sucedido, navega para a próxima página
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ArbitraryScreen(),
+                              builder: (context) => MenuScreen(),
                             ),
                           );
                         }
@@ -196,7 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MenuScreen(),
+                            builder: (context) => ArbitraryScreen(),
                           ),
                         );
                       },
